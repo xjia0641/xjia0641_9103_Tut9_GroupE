@@ -536,6 +536,7 @@ function draw() {
   drawLines();
   drawRectangles();
   drawSingleGrids();
+  drawNoise(); // Call drawNoise in draw for animation
 }  
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
