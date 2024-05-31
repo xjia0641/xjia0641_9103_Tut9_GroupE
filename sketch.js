@@ -543,3 +543,32 @@ function windowResized() {
   canvasSize = min(windowWidth, windowHeight);
   draw(); 
 }
+
+function initializePerlinNoiseArray(seed) {
+  noiseSeed(seed); // Set the noise seed
+  perlinNoiseArray = []; // Reset the noise array
+  for (let i = 0; i < valueArrayLength; i++) {
+    perlinNoiseArray.push(noise(i * perlinNoiseStep));
+  }
+}
+
+function myNoise(x, y) {
+  // Combine x and y to create a unique index
+  let index = Math.floor((x + y * width) % valueArrayLength);
+  return perlinNoiseArray[index];
+}
+
+function drawNoise() {
+  let seed = millis(); // Change seed over time
+  initializePerlinNoiseArray(seed); // Initialize the Perlin noise array with the new seed
+  let noiseScale = 0.1; // Scale for Perlin noise
+  for (let x = 0; x < width; x += canvasSize / gridSize) {
+    for (let y = 0; y < height; y += canvasSize / gridSize) {
+      let noiseVal = myNoise(x * noiseScale, y * noiseScale); // Get Perlin noise value
+      let alpha = noiseVal * 50; // Map noise value to alpha (opacity)
+      fill(0, alpha); // Black color with varying opacity
+      noStroke();
+      rect(x, y, canvasSize / gridSize, canvasSize / gridSize);
+    }
+  }
+}
