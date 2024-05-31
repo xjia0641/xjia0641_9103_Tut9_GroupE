@@ -22,13 +22,17 @@ There is also the drawNoise() function that keeps updating the mesh based on the
 ### Reference
 
 The coding train(2017)Perlin Noise in p5.js
+
 https://www.youtube.com/watch?v=Qf4dIN99e2w&list=PLRqwX-V7Uu6bgPNQAdxQZpJuJCjeOr7VD
 
 The coding train(2019)Coding Challenge #136.1: Polar Perlin Noise Loops
+
 https://www.youtube.com/watch?v=ZI1dmHv3MeM
 
 Open AI(2024)ChatGPT
+
 https://chatgpt.com/
 
 Image:TV screen effect
+
 https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Ftv-screen-effect&psig=AOvVaw3dBy3x8pI11IAMMh8GI-MB&ust=1717240513845000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPCMhcvht4YDFQAAAAAdAAAAABAE
