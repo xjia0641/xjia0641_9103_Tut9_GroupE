@@ -5,19 +5,18 @@ let yellow = '#ffd800'
 let red = '#A2362A'
 let gray = '#DADBD5'
 let blue = '#4B66C1'
+// Initialize an empty array to store Perlin noise values
+let perlinNoiseArray = [];
+// Set the length of the array to 200 values
+let valueArrayLength = 200;
+// Set the step size for generating Perlin noise values
+let perlinNoiseStep = 1;
 
 function setup() {
   createCanvas(canvasSize, canvasSize);
   canvasSize = min(windowWidth, windowHeight);
-  noLoop(); // Ensure draw() is called only once
-}
-
-function draw() {
-  background(255);
-  drawGrid();
-  drawLines();
-  drawRectangles(); 
-  drawSingleGrids(); 
+  frameRate(60);
+  loop(); // Ensure draw() is called only once
 }
 
 //  draw grid lines
@@ -46,6 +45,7 @@ function getIntersectingGrids(x1, y1, x2, y2) {
   let sy = y1Idx < y2Idx ? 1 : -1;// Determine the vertical stepping direction, if y1 is less than y2 then the stepping is positive, otherwise it is negative
   let err = dx - dy;// Initialize the error term, used to determine if the next point is a horizontal or vertical step
 // loop until it reaches the end point
+
   while (true) {
     intersectingGrids.push(`${x1Idx},${y1Idx}`);
     if (x1Idx === x2Idx && y1Idx === y2Idx) break;// If the current point has reached the end, exit the loop.
@@ -76,11 +76,14 @@ function fillGrid(x, y, color) {
 function drawLine(x1, y1, x2, y2, color) {
   let intersectingGrids = getIntersectingGrids(x1, y1, x2, y2);
   for (let coord of intersectingGrids) {
-    let [x, y] = coord.split(',').map(Number);//// Split the coordinates of each grid cell (as a string) into [x, y] arrays and convert them to numbers
+    let [x, y] = coord.split(',').map(Number);// Split the coordinates of each grid cell (as a string) into [x, y] arrays and convert them to numbers
     fillGrid(x, y, color);
   }
 
-
+  // Auxiliary line
+  // stroke(0);
+  // strokeWeight(2);
+  // line(x1, y1, x2, y2);
 }
 
 function drawTestLine() {
@@ -530,9 +533,57 @@ function drawSingleGrids() {
   
 }
 
-//  WindowResized
+function draw() {
+  background(255);
+  drawGrid();
+  drawLines();
+  drawRectangles();
+  drawSingleGrids();
+  // Call drawNoise in draw for animation
+  drawNoise();
+}
+
+  //
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   canvasSize = min(windowWidth, windowHeight);
   draw(); 
+}
+
+//Declare and define a function named initializePerlinNoiseArray, which accepts a parameter seed to set the seed value of the noise.
+function initializePerlinNoiseArray(seed) {
+  noiseSeed(seed); // Set the noise seed
+  perlinNoiseArray = []; // Reset the noise array
+  for (let i = 0; i < valueArrayLength; i++) {
+    perlinNoiseArray.push(noise(i * perlinNoiseStep));
+  }
+}
+
+function myNoise(x, y) {
+  // Combine x and y to create a unique index
+  let index = Math.floor((x + y * width) % valueArrayLength);
+  return perlinNoiseArray[index];
+}
+
+function drawNoise() {
+  let seed = millis(); // Change seed over time
+  initializePerlinNoiseArray(seed); // Initialize the Perlin noise array with the new seed
+  let noiseScale = 0.1; // Scale for Perlin noise
+  for (let x = 0; x < width; x += canvasSize / gridSize) {
+    for (let y = 0; y < height; y += canvasSize / gridSize) {
+      let noiseVal = myNoise(x * noiseScale, y * noiseScale); // Get Perlin noise value
+      let alpha = noiseVal * 50; // Map noise value to alpha (opacity)
+      fill(0, alpha); // Black color with varying opacity
+      noStroke();
+      rect(x, y, canvasSize / gridSize, canvasSize / gridSize);
+    }
+  }
+}
+
+function mousePressed() {
+  loop(); // Start looping the draw function when the mouse is pressed
+}
+
+function mouseReleased() {
+  noLoop(); // Stop looping the draw function when the mouse is released
 }
