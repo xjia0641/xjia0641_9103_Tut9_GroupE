@@ -11,3 +11,10 @@
 
 ![An image of a tv screen effect](readmeimages/images.jpg)
 
+I didn't make many changes to the group code. I implemented the Perlin noise effect based on the group code. The three techniques mentioned above were implemented by me based on the class tutorials and looking for advanced tutorials on the Internet. Because the knowledge in the course could not allow me to produce such an effect.
+My sources were ChatGPT and the tutorials on Perlin noise on Youtube.
+
+I used noise initialization, using the function initializePerlinNoiseArray(seed) to set the seed and fill the array with Perlin noise values.
+The myNoise(x,y) function is used to retrieve the noise value for a specific coordinate.
+There is also the drawNoise() function that keeps updating the mesh based on the new Perlin noise value, changing both the color and opacity.
+(Detailed comments are in the code.)
