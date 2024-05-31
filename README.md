@@ -9,5 +9,5 @@
 
 ### My inspiration comes from the screen distortion effect after a black and white TV loses its signal. These garbled characters and transparent color blocks will show smooth and continuous changes over time. This effect is very suitable for Perlin noise.
 
-![An image of a tv screen effect](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Ftv-screen-effect&psig=AOvVaw3dBy3x8pI11IAMMh8GI-MB&ust=1717240513845000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPCMhcvht4YDFQAAAAAdAAAAABAE)
+![An image of a tv screen effect](readmeimages/images.jpg)
 
