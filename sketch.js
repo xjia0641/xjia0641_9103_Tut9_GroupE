@@ -5,11 +5,14 @@ let yellow = '#ffd800'
 let red = '#A2362A'
 let gray = '#DADBD5'
 let blue = '#4B66C1'
-
+let perlinNoiseArray = [];
+let valueArrayLength = 200;
+let perlinNoiseStep = 1;
 function setup() {
   createCanvas(canvasSize, canvasSize);
   canvasSize = min(windowWidth, windowHeight);
-  noLoop(); // Ensure draw() is called only once
+  frameRate(60);
+  loop(); // Ensure draw() is called only once
 }
 
 function draw() {
@@ -537,12 +540,13 @@ function draw() {
   drawRectangles();
   drawSingleGrids();
   drawNoise(); // Call drawNoise in draw for animation
-}  
+}
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   canvasSize = min(windowWidth, windowHeight);
   draw(); 
 }
+
 
 function initializePerlinNoiseArray(seed) {
   noiseSeed(seed); // Set the noise seed
